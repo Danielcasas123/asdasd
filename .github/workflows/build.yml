@@ -1,4 +1,5 @@
 
+
 name: Build Inova 1 for Windows
 
 on:
@@ -11,7 +12,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Descargar el código
+      - name: Descargar codigo
         uses: actions/checkout@v4
 
       - name: Instalar Node.js
@@ -20,14 +21,16 @@ jobs:
           node-version: 22
 
       - name: Instalar dependencias
+        working-directory: "inova-1-source (1)/inova-1"
         run: npm install
 
       - name: Crear instalador
+        working-directory: "inova-1-source (1)/inova-1"
         run: npm run dist
 
       - name: Guardar instalador
         uses: actions/upload-artifact@v4
         with:
           name: Inova-1-Windows-Installer
-          path: dist/*.exe
+          path: "inova-1-source (1)/inova-1/dist/*.exe"
           if-no-files-found: error
